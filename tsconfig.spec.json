@@ -3,9 +3,10 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
+    "strictPropertyInitialization": false,
     "types": [
-      "jasmine"
-    ]
+      "jasmine", "node"
+    ], 
   },
   "files": [
     "src/test.ts",

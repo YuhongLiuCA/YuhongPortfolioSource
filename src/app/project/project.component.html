@@ -1,0 +1,29 @@
+<h2>Projects</h2>
+<div class="container"
+     fxLayout="column"
+     fxLayoutGap="10px" id="project-layout">
+
+    
+    <mat-card *ngFor="let project of projects">
+        <a id="project-item-button" href={{project.src}} target="_blank">
+        <img [src]="project.image" alt={{project.name}} id="project-img" />
+        <mat-card-title id="project-title">{{project.name}}</mat-card-title>
+        <mat-card-content id="project-content">
+          <p>{{project.description}}</p>
+        </mat-card-content>  
+      </a>   
+      <div id="project-sub-buttons">
+        <a class="source-code-link" href={{project.sourcecode}} target="_blank">
+          <button type="button" color="primary" class="project-sub-button">Source Code</button> 
+        </a> 
+        <a class="source-code-link" *ngIf="project.src" href={{project.src}} target="_blank">
+          <button type="button" color="primary" class="project-sub-button">Demo</button> 
+        </a> 
+      </div>
+      
+          
+    </mat-card>
+
+
+
+</div>
