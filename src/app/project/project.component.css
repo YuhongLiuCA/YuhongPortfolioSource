@@ -1,5 +1,6 @@
 #project-img {
     width: 400px;
+    height: 200px;
     border-radius: 20px;
     border-left: 25px;
 }
@@ -16,6 +17,7 @@
 #project-content {
     font-size: 18px;
     width: 400px;
+    min-height: 5rem;
 }
 #project-item-button {
     border: none;
@@ -40,8 +42,14 @@
 #project-sub-buttons {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1rem;
 }
 
 h2 {
     text-align: center;
+}
+
+.project-card-item {
+    min-height: 24rem;
+    padding-bottom: 2rem;
 }

@@ -17,7 +17,7 @@ export class ProjectComponent implements OnInit {
     name: "Tour reference San Francisco Bay Area",
     description: "This is a full stack React project using React, HTML, CSS, Firebase. The application use firebase to store user information.",
     image: '/assets/travelsf.jpg',
-    src: "https://travelsf.web.app/",
+    src: "https://condescending-brown-840bdf.netlify.app",
     sourcecode: "https://github.com/YuhongLiuCA/TravelsfSource"
   },{
     name: "Tic-tac-toe with AI algorithm",
@@ -27,10 +27,10 @@ export class ProjectComponent implements OnInit {
     sourcecode: "https://github.com/YuhongLiuCA/tic-tac-toeSource"
   },{
     name: "YL Grocery",
-    description: "Simple LWC together with APEX app on Salesforce.",
-    image: "/assets/ylgrocery.jpg",
-    src: "",
-    sourcecode: "https://github.com/YuhongLiuCA/ylGrocery"
+    description: "Full stack APP based on Salesforce Digital Experience, Front-end using LWC, backend using APEX.",
+    image: "/assets/calculator.jpg",
+    src: "https://ylgrocery-developer-edition.na163.force.com/",
+    sourcecode: "https://github.com/YuhongLiuCA/Grocery"
   }];
 
   constructor() { }

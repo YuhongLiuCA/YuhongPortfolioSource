@@ -18,13 +18,6 @@ private params = {
 };
   constructor(private formBuilder: FormBuilder) {
     
-    //AWS.config.credentials = new AWS.Credentials('AKIAYWKDXJBTNM5X3CQN', 'zKvll6tFgcfH83ri+a0A/bSHpJlj7bY3PK10C4Xf', '');
-    //AWS.config.update({
-    //region: 'us-west-1'
-    //});
-
-    //this.dynamodb = new AWS.DynamoDB();
-    //this.docClient = new AWS.DynamoDB.DocumentClient(); 
   }
 
   title = 'YuhongPortfolio';

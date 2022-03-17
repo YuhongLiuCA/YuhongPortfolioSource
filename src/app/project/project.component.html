@@ -4,7 +4,7 @@
      fxLayoutGap="10px" id="project-layout">
 
     
-    <mat-card *ngFor="let project of projects">
+    <mat-card *ngFor="let project of projects" class="project-card-item">
         <a id="project-item-button" href={{project.src}} target="_blank">
         <img [src]="project.image" alt={{project.name}} id="project-img" />
         <mat-card-title id="project-title">{{project.name}}</mat-card-title>
@@ -19,8 +19,7 @@
         <a class="source-code-link" *ngIf="project.src" href={{project.src}} target="_blank">
           <button type="button" color="primary" class="project-sub-button">Demo</button> 
         </a> 
-      </div>
-      
+      </div>     
           
     </mat-card>
 
