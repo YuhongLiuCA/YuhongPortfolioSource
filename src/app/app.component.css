@@ -247,9 +247,11 @@
     background-color: rgb(1,161,248);
     border-radius: 5px;
     min-height: 2rem;
+    padding: 1rem;
   }
   #git-button{
     background-color: rgb(1,161,248);
+    text-align: center;
   }
 
   #comment-submit:hover {
