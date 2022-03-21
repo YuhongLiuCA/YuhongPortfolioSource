@@ -2,6 +2,8 @@ import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Comment } from './comment.model';
+import { CommentsService } from './comments.service';
 /*
 This protfolio is using Angular and Firebase.
 */
@@ -12,14 +14,7 @@ This protfolio is using Angular and Firebase.
 })
 
 export class AppComponent {
-  //item$: Observable<Item[]>;
-//private docClient;
-interval;
-private params = {
-    TableName: 'Movies'
-};
-
-constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+constructor(private formBuilder: FormBuilder, private http: HttpClient, private commentsService: CommentsService) {
     
 }
 
@@ -31,63 +26,48 @@ userFeedback = true;
     user_email: '',
     comment_feedback: ''
   });
+  interval;
   commentThankyou = false;
   commentNumber = 0;
-  loadedComments = [];
+  loadedComments: Comment[] = [];
+  error = null;
 
+  //User wants the feedback
   commentUserFeedbackYes() {
     this.userFeedback = true;  
   }
+
+  //User does not want the feedback
   commentUserFeedbackNo() {
     this.userFeedback = false;
   }
 
 
+  //Submit comment
   onSubmit() {
-    const item = {
-      id: 1,
-      user_name: this.commentForm.value.user_name, 
-      user_number: this.commentForm.value.user_number, 
-      user_email: this.commentForm.value.user_email, 
-      comment_feedback: this.commentForm.value.comment_feedback 
-    };
+    //Get current all comments from Datbase, take the number
+    this.commentsService.getComments().subscribe(
+      comments => {
+        this.loadedComments = comments;
+        this.commentNumber = comments.length + 1;
+        console.log("l="+comments.length+" n="+this.loadedComments.length);
 
-    // Send Http request
-    this.http
-      .post(
-        'https://yuhongportfolio-default-rtdb.firebaseio.com/comments/comment.json',
-        item
-      )
-      .subscribe(responseData => {
-        console.log(responseData);
-      });
-    this.commentThankyou = true;
-    this.interval = setInterval(() => {
-      this.commentThankyou = false;
-      clearInterval(this.interval);
-    },5000)
+        //Post current comment to Datbase
+        this.commentsService.postComment(this.commentForm.value.user_name, this.commentForm.value.user_number, this.commentForm.value.user_email, this.commentForm.value.comment_feedback);
+        
+        //Display notification text for 5 seconds
+        this.commentThankyou = true;
+        this.interval = setInterval(() => {
+          this.commentThankyou = false;
+          clearInterval(this.interval);
+        },5000);
     
-    this.commentForm.reset();
-  }
-
-  private fetchPosts() {
-    this.http
-      .get('https://yuhongportfolio-default-rtdb.firebaseio.com/comments/comment.json')
-      .pipe(
-        map(responseData => {
-          const postsArray = [];
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              //postsArray.push({ ...responseData[key], id: key });
-            }
-          }
-          return postsArray;
-        })
-      )
-      .subscribe(posts => {
-        // ...
-        console.log(posts);
-        //this.loadedComments = posts;
-      });
+        this.commentForm.reset();
+      },
+      error => {
+        this.error = error.message;
+        this.commentForm.reset();
+      }
+    );      
   }
 }
